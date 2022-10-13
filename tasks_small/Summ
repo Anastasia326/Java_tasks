@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class TaskFirst {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int size = in.nextInt();
+        int[] arrayFirst = new int[size];
+        int[] arraySecond = new int[size];
+        int[] indexArray = new int[size];
+        int firstIndex = 0, secondIndex = 0;
+        int maxValue = 0;
+
+        for(int i = 0; i < size; ++i) {
+            arrayFirst[i] = in.nextInt();
+        }
+
+        for(int j = 0; j < size; ++j) {
+            arraySecond[j] = in.nextInt();
+            //заполняем массив индекос индексами тех элементов, которые максимальны
+            // и подходят под условте i <= j для данного элемента первого массива
+
+            if(j == 0 || arrayFirst[j] > maxValue) {
+                indexArray[j] = j;
+                maxValue = arrayFirst[j];
+            } else {
+                indexArray[j] = indexArray[j - 1];
+            }
+
+        }
+        int maxSum = arrayFirst[firstIndex] + arraySecond[secondIndex];
+
+        for(int j = 0; j < size; ++j){
+            int nowSum = arraySecond[size - 1 -j] + arrayFirst[indexArray[size - 1 -j]];
+            if(nowSum >= maxSum){
+                maxSum = nowSum;
+                firstIndex = indexArray[size - 1 -j];
+                secondIndex = size - 1 -j;
+            }
+        }
+
+        in.close();
+        System.out.print(firstIndex);
+        System.out.print(" ");
+        System.out.print(secondIndex);
+    }
+}

@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class TaskThird {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int quantity = 0;
+        int sizeFirst = in.nextInt();
+        int[] arrayFirst = new int[sizeFirst];
+
+        for (int i = 0; i < sizeFirst; ++i) {
+            arrayFirst[i] = in.nextInt();
+        }
+
+        int sizeSecond = in.nextInt();
+        int[] arraySecond = new int[sizeSecond];
+        int indexFirst = 0, indexSecond = sizeSecond - 1;
+
+        for (int i = 0; i < sizeSecond; ++i) {
+            arraySecond[i] = in.nextInt();
+        }
+        int k = in.nextInt();
+
+        while ((indexFirst <= sizeFirst - 1) && (indexSecond >= 0)) {
+            int sum = arrayFirst[indexFirst] + arraySecond[indexSecond];
+            if (sum > k) {
+                --indexSecond;
+            } else if (sum < k) {
+                ++indexFirst;
+            } else {
+                ++quantity;
+                --indexSecond;
+            }
+        }
+
+        in.close();
+        System.out.print(quantity);
+    }
+}
+
