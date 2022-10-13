@@ -1,0 +1,16 @@
+image: ubuntu
+
+before_script:
+  - apt update
+  - apt install maven -y
+
+cache:
+  paths:
+    - .m2/repository/
+
+build:
+  stage: build
+  tags:
+    - docker-atp
+  script:
+    - mvn compile
